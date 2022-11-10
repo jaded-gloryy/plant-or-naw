@@ -2,17 +2,24 @@
 
 # from torch.autograd import Variable
 
+def dataloader():
+    """
+    Load data
+    """
+    return
+
+def downloadData():
+    """
+    Download daat from databases.
+    Return: Images and labels?
+    """
+
 def trainModel():
     """
     Used to train a model
     """
     return
 
-def dataloader():
-    """
-    Load data
-    """
-    return
 
 def saveModel():
     """
