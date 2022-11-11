@@ -1,12 +1,18 @@
 #helper functions for building and training a ml
-
+from torchvision.transforms import Compose, Resize, CenterCrop, Grayscale, ToTensor
+from classes.data import CustomImageDataset
+from torch.utils.data import DataLoader
 # from torch.autograd import Variable
 
-def dataloader():
+def dataloader(dataset, batch_size):
     """
     Load data
+    dataset = training, test, or validation subsets
+
+    Returns batched data as an iterable
     """
-    return
+    batched_data = DataLoader(dataset=dataset, batch_size=batch_size, shuffle=True)
+    return batched_data
 
 def downloadData():
     """
@@ -14,10 +20,12 @@ def downloadData():
     Return: Images and labels?
     """
 
-def trainModel():
+def trainModel(learning_rate, batch_size, epochs):
     """
     Used to train a model
     """
+
+
     return
 
 
@@ -52,3 +60,20 @@ def testBatch():
     # # Let's show the predicted labels on the screen to compare with the real ones
     # print('Predicted: ', ' '.join('%5s' % classes[predicted[j]] 
     #                           for j in range(batch_size)))
+
+def constructImageTransform(number_output_channels, desired_size):
+    """
+    Function to transform images to grayscale, resize, and center crop.
+    """
+    train_transform = Compose([Grayscale(num_output_channels=number_output_channels),Resize(desired_size), CenterCrop(desired_size), ToTensor()]) 
+
+    return train_transform 
+
+def transformDataset(transforms):
+    """
+    Function to transform and build a dataset.
+    TODO: Build this function on the CustomImageDataset class. kwargs = whatever we need 
+    to download images and labels
+    """
+    transformed_dataset= CustomImageDataset(transform=transforms)
+    return transformed_dataset
