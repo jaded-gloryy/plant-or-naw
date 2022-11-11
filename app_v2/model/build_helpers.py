@@ -2,6 +2,7 @@
 from torchvision.transforms import Compose, Resize, CenterCrop, Grayscale, ToTensor
 from classes.data import CustomImageDataset
 from torch.utils.data import DataLoader
+import torch
 # from torch.autograd import Variable
 
 def dataloader(dataset, batch_size):
@@ -29,13 +30,15 @@ def trainModel(learning_rate, batch_size, epochs):
     return
 
 
-def saveModel():
+def saveModel(model):
     """
     Save a trained model. Stores model weights.
+    TODO: See if it's better to save the model with it's shape instead of just the state_dict. Note: Before loading
+    the saved model (with state_dict), you need to create an instance of the same model first, 
+    and then load the parameters using load_state_dict() method.
     """
-    # path = "./myFirstModel.pth"
-    # torch.save(model.state_dict(), path)
-    return
+    path = "./myFirstModel.pth"
+    torch.save(model.state_dict(), path)
 
 def testBatch():
     """
